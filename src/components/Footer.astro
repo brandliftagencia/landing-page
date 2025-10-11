@@ -1,0 +1,111 @@
+---
+import { getRelativeLocaleUrl } from 'astro:i18n';
+
+// Get current locale from Astro's built-in i18n
+const currentLocale = Astro.currentLocale;
+
+// Generate proper locale URLs using Astro's helper functions
+const spanishUrl = getRelativeLocaleUrl('es');
+const englishUrl = getRelativeLocaleUrl('en');
+
+// Translation content
+const translations = {
+  es: {
+    followUs: "Síguenos en nuestras redes sociales",
+    copyright: "Todos los derechos reservados - BrandLift Agencia 2025",
+    instagramLabel: "Síguenos en Instagram",
+    youtubeLabel: "Síguenos en YouTube"
+  },
+  en: {
+    followUs: "Follow us on our social media",
+    copyright: "All rights reserved - BrandLift Agency 2025",
+    instagramLabel: "Follow us on Instagram",
+    youtubeLabel: "Follow us on YouTube"
+  }
+};
+
+const t = translations[currentLocale as keyof typeof translations] || translations.es;
+---
+
+<footer class="bg-white px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 py-8 lg:py-12">
+  <div class="max-w-5xl mx-auto">
+    <!-- Social Media Section -->
+    <div class="text-center mb-6">
+      <h3 class="text-gray-900 font-medium text-lg mb-4">
+        {t.followUs}
+      </h3>
+      
+      <!-- Social Media Icons -->
+      <div class="flex justify-center items-center space-x-6">
+        <!-- Instagram Icon -->
+        <a 
+          href="https://instagram.com/brandlif_agencia" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          class="flex items-center justify-center w-12 h-12 rounded-full bg-gradient-to-r from-primary-red to-primary-blue text-white hover:opacity-90 transition-opacity"
+          aria-label={t.instagramLabel}
+        >
+          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+          </svg>
+        </a>
+        
+        <!-- YouTube Icon -->
+        <a 
+          href="https://youtube.com/@BrandLiftAgencia" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          class="flex items-center justify-center w-12 h-12 rounded-full bg-gradient-to-r from-primary-red to-primary-blue text-white hover:opacity-90 transition-opacity"
+          aria-label={t.youtubeLabel}
+        >
+          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+
+    <!-- Divider Line -->
+    <div class="w-full h-0.5 bg-white-smoke opacity-50 mb-6"></div>
+
+    <!-- Language Selector & Copyright Section -->
+    <div class="flex flex-col md:flex-row items-center justify-between space-y-4 md:space-y-0">
+      <!-- Language Selector -->
+      <div class="flex items-center space-x-2">
+        <span class="text-gray-600 text-sm font-medium">
+          {currentLocale === 'es' ? 'Idioma:' : 'Language:'}
+        </span>
+        <div class="flex items-center space-x-2">
+          <a 
+            href={spanishUrl}
+            class={`px-3 py-1 rounded-full text-sm font-medium transition-colors ${
+              currentLocale === 'es' 
+                ? 'bg-gradient-to-r from-primary-red to-primary-blue text-white' 
+                : 'text-gray-600 hover:text-primary-blue'
+            }`}
+          >
+            ES
+          </a>
+          <span class="text-gray-400">|</span>
+          <a 
+            href={englishUrl}
+            class={`px-3 py-1 rounded-full text-sm font-medium transition-colors ${
+              currentLocale === 'en' 
+                ? 'bg-gradient-to-r from-primary-red to-primary-blue text-white' 
+                : 'text-gray-600 hover:text-primary-blue'
+            }`}
+          >
+            EN
+          </a>
+        </div>
+      </div>
+
+      <!-- Copyright Section -->
+      <div class="text-center md:text-right">
+        <p class="text-gray-600 text-sm font-medium">
+          {t.copyright}
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>

@@ -1,0 +1,80 @@
+---
+import EmailForm from './EmailForm.astro';
+import curvedLine from '../assets/curved line.svg';
+
+const currentLocale = Astro.url.pathname.startsWith('/en') ? 'en' : 'es';
+
+const translations = {
+  es: {
+    tagline: 'AGENCIA DE SEO PARA COMPAÑÍAS B2B',
+    headline: 'Elevamos la presencia de tu marca con tecnologías de primer nivel',
+    description: 'En BrandLift tenemos a un equipo de expertos en la ejecución de estrategias y tecnologías SEO para la generación de leads calificados'
+  },
+  en: {
+    tagline: 'SEO AGENCY FOR B2B COMPANIES',
+    headline: 'We elevate your brand presence with first-level technologies',
+    description: 'At BrandLift we have a team of experts in the execution of SEO strategies and technologies for qualified lead generation'
+  }
+};
+
+const t = translations[currentLocale] || translations.es;
+---
+
+<section class="relative min-h-screen flex items-center justify-center px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 overflow-hidden">
+  <!-- Gradient Background -->
+  <div class="absolute inset-0 bg-gradient-to-r from-primary-red to-primary-blue"></div>
+  
+  <!-- Content -->
+  <div class="relative z-10 max-w-7xl mx-auto text-center">
+    <!-- Tagline -->
+    <div class="mb-8 flex justify-center">
+      <div class="inline-block px-6 py-3 rounded-full border-2 border-white text-white text-sm font-medium tracking-wide">
+        {t.tagline}
+      </div>
+    </div>
+
+    <!-- Main Headline -->
+    <h1 class="text-4xl md:text-h1 text-white font-bold mb-6 leading-tight">
+      <span class="block">{t.headline.split(' ').slice(0, Math.ceil(t.headline.split(' ').length / 2)).join(' ')}</span>
+      <span class="block relative">
+        {t.headline.split(' ').slice(Math.ceil(t.headline.split(' ').length / 2)).join(' ')}
+        <img src={curvedLine.src} alt="Decorative curved line" class="absolute -bottom-4 left-1/2 transform -translate-x-1/2 h-6 w-auto" />
+      </span>
+    </h1>
+
+    <!-- Description -->
+    <p class="text-lg md:text-paragraph text-white/90 mb-12 w-md mx-auto mt-10 leading-relaxed">
+      {t.description} 
+    </p>
+
+    <!-- Email Form -->
+    <div class="flex justify-center">
+      <div class="text-left">
+        <EmailForm />
+      </div>
+    </div>
+  </div>
+
+  <!-- Decorative Elements -->
+  <div class="absolute top-1/4 left-10 w-20 h-20 bg-white/10 rounded-full blur-xl"></div>
+  <div class="absolute bottom-1/4 right-10 w-32 h-32 bg-third-yellow/20 rounded-full blur-2xl"></div>
+  <div class="absolute top-1/2 right-1/4 w-16 h-16 bg-white/5 rounded-full blur-lg"></div>
+</section>
+
+<style>
+  /* Custom underline animation */
+  .underline-wave {
+    position: relative;
+  }
+  
+  .underline-wave::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 12'%3E%3Cpath d='M2 8C15 4 25 10 40 6C55 2 70 8 85 4C95 2 98 6 98 6' stroke='%23FFD93D' stroke-width='3' stroke-linecap='round' fill='none'/%3E%3C/svg%3E") no-repeat;
+    background-size: 100% 100%;
+  }
+</style>

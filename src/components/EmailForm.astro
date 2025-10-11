@@ -1,0 +1,141 @@
+---
+import { actions, isInputError } from 'astro:actions';
+
+const currentLocale = Astro.url.pathname.startsWith('/en') ? 'en' : 'es';
+
+const translations = {
+  es: {
+    placeholder: 'Escribe tu correo de contacto',
+    button: 'ENVIAR',
+    privacy: 'Acepto compartir mis datos personales con fines exclusivamente comerciales',
+    successMessage: 'Registro exitoso 🎉, te contactaremos pronto.',
+    errorMessage: 'Hubo un error al enviar el formulario. Por favor, inténtalo de nuevo.'
+  },
+  en: {
+    placeholder: 'Enter your contact email',
+    button: 'SEND',
+    privacy: 'I agree to share my personal data for exclusively commercial purposes',
+    successMessage: 'Successfull registration! 🎉',
+    errorMessage: 'There was an error sending the form. Please try again.'
+  }
+};
+
+const t = translations[currentLocale] || translations.es;
+
+// Get the result of the form submission
+const result = Astro.getActionResult(actions.sendEmail);
+const inputErrors = isInputError(result?.error) ? result.error.fields : {};
+---
+
+<div class="w-full max-w-md">
+
+  <form method="POST" action={actions.sendEmail} class="space-y-4">
+    <!-- Email Input -->
+    <div class="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-3">
+      <div class="flex-1">
+        <input
+          id="email-input"
+          type="email"
+          name="email"
+          placeholder={t.placeholder}
+          required
+          class="w-full px-4 py-3 rounded-full bg-white/20 backdrop-blur-sm border border-white/30 text-white placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-white/50 focus:border-transparent transition-all"
+        />
+        {inputErrors.email && (
+          <p class="mt-1 text-sm text-red-300">{inputErrors.email.join(', ')}</p>
+        )}
+      </div>
+      <button
+        type="submit"
+        class="px-6 py-3 rounded-full bg-white/20 backdrop-blur-sm border border-white/30 text-white font-medium hover:bg-white/30 hover:border-white/50 transition-all focus:outline-none focus:ring-2 focus:ring-white/50"
+      >
+        {t.button}
+      </button>
+    </div>
+
+    <!-- Privacy Checkbox -->
+    <div class="flex items-start space-x-3">
+      <input
+        type="checkbox"
+        name="privacy"
+        id="privacy"
+        value="true"
+        required
+        class="mt-1 w-4 h-4 text-primary-blue bg-white/20 border-white/30 rounded focus:ring-white/50 focus:ring-2"
+      />
+      <label for="privacy" class="text-sm text-white/90 leading-relaxed">
+        {t.privacy}
+      </label>
+    </div>
+    {inputErrors.privacy && (
+      <p class="text-sm text-red-300">{inputErrors.privacy.join(', ')}</p>
+    )}
+  </form>
+
+  <!-- Success Popup Notification -->
+  {result?.data && (
+    <div id="success-notification" class="fixed bottom-6 right-6 z-50 animate-slide-in">
+      <div class="bg-green-500/20 backdrop-blur-md border border-green-500/30 rounded-2xl px-6 py-4 shadow-2xl">
+        <div class="flex items-center space-x-3">
+          <div class="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center">
+            <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+            </svg>
+          </div>
+          <p class="text-green-100 text-base font-medium">{t.successMessage}</p>
+        </div>
+      </div>
+    </div>
+  )}
+
+  <!-- Error Popup Notification -->
+  {result?.error && !isInputError(result.error) && (
+    <div id="error-notification" class="fixed bottom-6 right-6 z-50 animate-slide-in">
+      <div class="bg-red-500/20 backdrop-blur-md border border-red-500/30 rounded-2xl px-6 py-4 shadow-2xl">
+        <div class="flex items-center space-x-3">
+          <div class="w-6 h-6 bg-red-500 rounded-full flex items-center justify-center">
+            <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+          </div>
+          <p class="text-red-100 text-base font-medium">{t.errorMessage}</p>
+        </div>
+      </div>
+    </div>
+  )}
+</div>
+
+<style>
+  @keyframes slide-in {
+    from {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+
+  .animate-slide-in {
+    animation: slide-in 0.3s ease-out;
+  }
+
+  /* Auto-hide notification after 5 seconds */
+  #success-notification,
+  #error-notification {
+    animation: slide-in 0.3s ease-out, fade-out 0.3s ease-in 4.7s forwards;
+  }
+
+  @keyframes fade-out {
+    from {
+      transform: translateX(0);
+      opacity: 1;
+    }
+    to {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+  }
+</style>
+

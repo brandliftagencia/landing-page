@@ -1,0 +1,254 @@
+---
+import { Image } from 'astro:assets';
+import { getRelativeLocaleUrl } from 'astro:i18n';
+import logoBrandLift from '../assets/logo-brandlift.png';
+
+// Get current locale from Astro's built-in i18n
+const currentLocale = Astro.currentLocale;
+
+// Generate proper locale URLs using Astro's helper functions
+const spanishUrl = getRelativeLocaleUrl('es');
+const englishUrl = getRelativeLocaleUrl('en');
+---
+
+<header class="absolute top-0 left-0 right-0 z-50 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 py-3 lg:py-4 bg-white">
+  <div class="flex items-center justify-between max-w-5xl mx-auto">
+    <!-- Logo -->
+    <div class="flex items-center">
+      <Image 
+        src={logoBrandLift} 
+        alt="BrandLift Logo" 
+        width={90}
+        class="h-auto"
+      />
+    </div>
+
+    <!-- Desktop Navigation -->
+    <nav class="hidden md:flex items-center space-x-8">
+      <a href="#nosotros" class="text-gray-900 hover:text-primary-blue transition-colors font-medium">
+        NOSOTROS
+      </a>
+      <div class="relative group">
+        <button data-servicios-button class="text-gray-900 hover:text-primary-blue transition-colors font-medium flex items-center">
+          SERVICIOS
+          <svg class="w-4 h-4 ml-1" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+          </svg>
+        </button>
+        
+        <!-- Servicios Dropdown Menu -->
+        <div data-servicios-dropdown class="absolute left-0 mt-2 w-56 bg-white rounded-lg shadow-lg border border-gray-200 opacity-0 invisible transition-all duration-200 group-hover:opacity-100 group-hover:visible">
+          <div class="py-2">
+            <a href="#seo-tecnico" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+              SEO técnico
+            </a>
+            <a href="#seo-local" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+              SEO local
+            </a>
+            <a href="#produccion-contenidos" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+              Producción de contenidos
+            </a>
+          </div>
+        </div>
+      </div>
+      <a href="#proyectos" class="text-gray-900 hover:text-primary-blue transition-colors font-medium">
+        PROYECTOS
+      </a>
+    </nav>
+
+    <!-- Desktop Language Selector & Contact Button -->
+    <div class="hidden md:flex items-center space-x-4">
+      <!-- Language Dropdown -->
+      <div class="relative group">
+        <button data-language-button class="flex items-center space-x-2 px-4 py-2 rounded-full bg-gradient-to-r from-primary-red to-primary-blue text-white text-sm font-medium hover:opacity-90 transition-opacity">
+          <span>{currentLocale === 'es' ? 'ES (Perú)' : 'EN (US)'}</span>
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+          </svg>
+        </button>
+        
+        <!-- Dropdown Menu -->
+        <div data-language-dropdown class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 opacity-0 invisible transition-all duration-200 group-hover:opacity-100 group-hover:visible">
+          <div class="py-2">
+            <a href={spanishUrl} class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+              ES (Perú)
+            </a>
+            <a href={englishUrl} class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+              EN (US)
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Contact Button -->
+      <a href="https://wa.me/51968781139" target="_blank" rel="noopener noreferrer" class="flex items-center space-x-2 px-6 py-2 rounded-full border-2 border-primary-red text-primary-red font-medium hover:bg-gradient-to-r from-primary-red to-primary-blue hover:text-white transition-colors">
+        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/>
+        </svg>
+        <span>CONTACTAR</span>
+      </a>
+    </div>
+
+    <!-- Mobile Menu Button -->
+    <button class="md:hidden p-2 rounded-lg text-gray-900 hover:bg-gray-100 transition-colors" data-mobile-menu-button>
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+      </svg>
+    </button>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div data-mobile-menu class="md:hidden fixed top-0 left-0 right-0 bg-white shadow-lg transform -translate-y-full transition-transform duration-300 ease-in-out z-40">
+    <div class="px-4 py-6 space-y-6">
+      <!-- Mobile Navigation Links -->
+      <nav class="space-y-4">
+        <a href="#nosotros" class="block text-gray-900 hover:text-primary-blue transition-colors font-medium py-2">
+          NOSOTROS
+        </a>
+        <div class="space-y-2">
+          <button data-mobile-servicios-button class="w-full text-left text-gray-900 hover:text-primary-blue transition-colors font-medium py-2 flex items-center justify-between">
+            SERVICIOS
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+            </svg>
+          </button>
+          
+          <!-- Mobile Servicios Dropdown -->
+          <div data-mobile-servicios-dropdown class="hidden pl-4 space-y-2">
+            <a href="#seo-tecnico" class="block text-gray-600 hover:text-primary-blue transition-colors py-1">
+              SEO técnico
+            </a>
+            <a href="#seo-local" class="block text-gray-600 hover:text-primary-blue transition-colors py-1">
+              SEO local
+            </a>
+            <a href="#produccion-contenidos" class="block text-gray-600 hover:text-primary-blue transition-colors py-1">
+              Producción de contenidos
+            </a>
+          </div>
+        </div>
+        <a href="#proyectos" class="block text-gray-900 hover:text-primary-blue transition-colors font-medium py-2">
+          PROYECTOS
+        </a>
+      </nav>
+
+      <!-- Mobile Language Selector & Contact Button -->
+      <div class="pt-4 border-t border-gray-200 space-y-4">
+        <!-- Language Dropdown -->
+        <div class="relative">
+          <button data-mobile-language-button class="w-full flex items-center justify-between px-4 py-3 rounded-full bg-gradient-to-r from-primary-red to-primary-blue text-white text-sm font-medium">
+            <span>{currentLocale === 'es' ? 'ES (Perú)' : 'EN (US)'}</span>
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+            </svg>
+          </button>
+          
+          <!-- Mobile Language Dropdown -->
+          <div data-mobile-language-dropdown class="hidden mt-2 bg-white rounded-lg border border-gray-200">
+            <div class="py-2">
+              <a href={spanishUrl} class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                ES (Perú)
+              </a>
+              <a href={englishUrl} class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                EN (US)
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Contact Button -->
+        <a href="https://wa.me/51968781139" target="_blank" rel="noopener noreferrer" class="w-full flex items-center justify-center space-x-2 px-6 py-3 rounded-full border-2 border-primary-red text-primary-red font-medium hover:bg-primary-red hover:text-white transition-colors">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/>
+          </svg>
+          <span>CONTACTAR</span>
+        </a>
+      </div>
+    </div>
+  </div>
+  </div>
+</header>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Mobile menu functionality
+    const mobileMenuButton = document.querySelector('[data-mobile-menu-button]');
+    const mobileMenu = document.querySelector('[data-mobile-menu]');
+    
+    if (mobileMenuButton && mobileMenu) {
+      mobileMenuButton.addEventListener('click', function() {
+        mobileMenu.classList.toggle('-translate-y-full');
+        mobileMenu.classList.toggle('translate-y-0');
+      });
+      
+      // Close mobile menu when clicking outside
+      document.addEventListener('click', function(event) {
+        if (event.target instanceof Node && 
+            !mobileMenuButton.contains(event.target) && 
+            !mobileMenu.contains(event.target)) {
+          mobileMenu.classList.add('-translate-y-full');
+          mobileMenu.classList.remove('translate-y-0');
+        }
+      });
+    }
+
+    // Desktop Language dropdown functionality
+    const languageButton = document.querySelector('[data-language-button]');
+    const languageDropdown = document.querySelector('[data-language-dropdown]');
+    
+    if (languageButton && languageDropdown) {
+      languageButton.addEventListener('click', function() {
+        languageDropdown.classList.toggle('opacity-0');
+        languageDropdown.classList.toggle('invisible');
+      });
+      
+      // Close dropdown when clicking outside
+      document.addEventListener('click', function(event) {
+        if (event.target instanceof Node && 
+            !languageButton.contains(event.target) && 
+            !languageDropdown.contains(event.target)) {
+          languageDropdown.classList.add('opacity-0', 'invisible');
+        }
+      });
+    }
+
+    // Mobile Language dropdown functionality
+    const mobileLanguageButton = document.querySelector('[data-mobile-language-button]');
+    const mobileLanguageDropdown = document.querySelector('[data-mobile-language-dropdown]');
+    
+    if (mobileLanguageButton && mobileLanguageDropdown) {
+      mobileLanguageButton.addEventListener('click', function() {
+        mobileLanguageDropdown.classList.toggle('hidden');
+      });
+    }
+
+    // Desktop Servicios dropdown functionality
+    const serviciosButton = document.querySelector('[data-servicios-button]');
+    const serviciosDropdown = document.querySelector('[data-servicios-dropdown]');
+    
+    if (serviciosButton && serviciosDropdown) {
+      serviciosButton.addEventListener('click', function() {
+        serviciosDropdown.classList.toggle('opacity-0');
+        serviciosDropdown.classList.toggle('invisible');
+      });
+      
+      // Close dropdown when clicking outside
+      document.addEventListener('click', function(event) {
+        if (event.target instanceof Node && 
+            !serviciosButton.contains(event.target) && 
+            !serviciosDropdown.contains(event.target)) {
+          serviciosDropdown.classList.add('opacity-0', 'invisible');
+        }
+      });
+    }
+
+    // Mobile Servicios dropdown functionality
+    const mobileServiciosButton = document.querySelector('[data-mobile-servicios-button]');
+    const mobileServiciosDropdown = document.querySelector('[data-mobile-servicios-dropdown]');
+    
+    if (mobileServiciosButton && mobileServiciosDropdown) {
+      mobileServiciosButton.addEventListener('click', function() {
+        mobileServiciosDropdown.classList.toggle('hidden');
+      });
+    }
+  });
+</script>
