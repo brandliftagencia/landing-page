@@ -2,14 +2,13 @@
 import { defineConfig, envField } from 'astro/config';
 import tailwind from '@astrojs/tailwind';
 
-import netlify from '@astrojs/netlify';
+import netlify from '@astrojs/netlify/functions';
 
 // https://astro.build/config
 export default defineConfig({
   // Add site URL for i18n helper functions
   site: 'https://brandlift.pe',
   
-  output: 'server',
 
   i18n: {
       defaultLocale: 'es',
@@ -22,7 +21,7 @@ export default defineConfig({
   integrations: [
       tailwind(),
 	],
-
+  output: 'server',
   adapter: netlify(),
 
   // Environment variable schema for better error handling
