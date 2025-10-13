@@ -8,6 +8,8 @@ import netlify from '@astrojs/netlify';
 export default defineConfig({
   // Add site URL for i18n helper functions
   site: 'https://brandlift.pe',
+  
+  output: 'server',
 
   i18n: {
       defaultLocale: 'es',
