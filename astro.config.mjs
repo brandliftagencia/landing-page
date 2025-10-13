@@ -1,5 +1,5 @@
 // @ts-check
-import { defineConfig } from 'astro/config';
+import { defineConfig, envField } from 'astro/config';
 import tailwind from '@astrojs/tailwind';
 
 import netlify from '@astrojs/netlify';
@@ -22,4 +22,14 @@ export default defineConfig({
 	],
 
   adapter: netlify(),
+
+  // Environment variable schema for better error handling
+  env: {
+    schema: {
+      RESEND_API_KEY: envField.string({
+        context: 'server',
+        access: 'secret',
+      }),
+    },
+  },
 });
