@@ -6,20 +6,21 @@ export interface Props {
   description?: string;
 }
 
-const { title, description = "BrandLift - Agencia de SEO para compañías B2B" } = Astro.props;
+const {description = "BrandLift - Agencia de SEO y de planeación de contenidos para marcas B2B"} = Astro.props;
 ---
 
 <!DOCTYPE html>
 <html lang={Astro.url.pathname.startsWith('/en') ? 'en' : 'es'}>
   <head>
     <meta charset="UTF-8" />
-    <meta name="description" content="BrandLift Agencia" />
+    <meta name="description" content={description} />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet" />
-    <title>{title}</title>
+    <script src="https://analytics.ahrefs.com/analytics.js" data-key="JgJ4ceIhlD8V5gncR9Bu/A" async></script>
+    <title>BrandLift Agencia</title>
   </head>
   <body class="font-inter bg-white text-gray-900">
     <slot />
