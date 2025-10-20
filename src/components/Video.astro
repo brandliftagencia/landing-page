@@ -1,0 +1,51 @@
+---
+// introducing BrandLift agency - video launch
+
+const currentLocale = Astro.url.pathname.startsWith('/en') ? 'en' : 'es';
+
+const translations = {
+  es: {
+    titleSub: {
+        part1: "Tú te centras en operar tu negocio,",
+        part2: "mientras nosotros elevamos tu marca"
+    },
+    description: 'Somos un grupo de estrategas y diseñadores equipados con la mejor tecnología para brindarte un servicio world-class.'
+  },
+  en: {
+    titleSub: {
+      part1: 'You focus on running your business,',
+      part2: 'while we elevate your brand.'
+    },
+    description: 'We are a group of strategists and designers equipped with the best technology to provide you with world-class service.'
+  }
+};
+
+const t = translations[currentLocale] || translations.es;
+const youtubeVideoId = 'oRwxjvV4RSo';
+---
+
+<section class="w-full px-6 py-16 bg-gradient-to-b from-gray-50 to-white">
+    <div class="max-w-2xl mx-auto text-center">
+      <h2 class="text-3xl md:text-4xl lg:text-5xl font-semibold leading-tight mb-6" style="color: #6B6FD1;">
+        {t.titleSub.part1}<br />
+        <span style="color: #DD6383;">{t.titleSub.part2}</span>
+      </h2>
+      
+      <p class="text-base md:text-lg leading-relaxed text-slate-500 mb-12 max-w-lg mx-auto">
+        {t.description}
+      </p>
+      
+      <div class="w-full max-w-xl mx-auto">
+        <div class="relative w-full pb-[56.25%] rounded-xl overflow-hidden shadow-2xl" style="background: linear-gradient(to bottom right, #6B6FD1, #535085);">
+          <iframe
+            class="absolute top-0 left-0 w-full h-full"
+            src={`https://www.youtube.com/embed/${youtubeVideoId}`}
+            title="Presentamos BrandLift Agencia"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen
+          ></iframe>
+        </div>
+      </div>
+    </div>
+  </section>

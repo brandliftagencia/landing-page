@@ -4,6 +4,8 @@ import tailwind from '@astrojs/tailwind';
 
 import netlify from '@astrojs/netlify/functions';
 
+import sitemap from '@astrojs/sitemap';
+
 // https://astro.build/config
 export default defineConfig({
   // Add site URL for i18n helper functions
@@ -16,11 +18,9 @@ export default defineConfig({
       routing: {
           prefixDefaultLocale: false
       }
-	},
+    },
 
-  integrations: [
-      tailwind(),
-	],
+  integrations: [tailwind(), sitemap()],
   output: 'server',
   adapter: netlify(),
 
